@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Checkout SCM') {
+      steps {
+        git branch: 'main', credentialsId: 'juliussun', url: 'https://github.com/juliussun/maven-project-jenkins.git'
+      }
+    }
+
+    stage('Install Maven') {
+      steps {
+        sh 'mvn -v' // Check if Maven is already installed
+      }
+    }
+
+    stage('Build and Package') {
+      steps {
+        sh 'mvn clean package -DskipTests' // Build and package without tests
+      }
+    }
+
+    stage('Archive JAR') {
+      steps {
+        archiveArtifacts 'target/*.jar'
+      }
+    }
+  }
+}
