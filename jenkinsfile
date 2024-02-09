@@ -10,7 +10,7 @@ pipeline {
 
     stage('Install Maven') {
       steps {
-        sh 'mvn -v' // Check if Maven is already installed
+        sh 'mvn -v' // Check if Maven is already installed!
       }
     }
 
